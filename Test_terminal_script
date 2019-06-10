@@ -1,0 +1,25 @@
+environment:
+ 1000  lo2
+ 1001  source ../fall2018/env/bin/activate
+ 1002  source ../fall2018/.bashrc 
+ 1003  module load cuda/8.0.61
+ 1004  cd /vulcan/scratch/junwang/planerecover/
+ 1005  python ./test_usc_jun.py --dataset=./usc/jun --output_dir=./output_usc_jun_test --test_list=./usc/test.txt --ckpt_file=./pre_trained_model/synthia_498000 &
+
+
+Test:
+ls | cat -n | while read n f; do mv "$f" `printf "%04d.jpg" $n`; done
+
+
+Original:
+python2 ./test_SYNTHIA.py --dataset=./synthia_dump_dir --output_dir=./output_test --test_list=./synthia_dump_dir/tst_100.txt --ckpt_file=./pre_trained_model/synthia_498000
+
+test_usc:
+python2 ./test_usc_jun.py --dataset=./usc_test_images --output_dir=./output_usc_test --test_list=./test_usc_100.txt --ckpt_file=./pre_trained_model/synthia_498000
+
+python2 ./test_usc_jun.py --dataset=./usc/jun --output_dir=./output_usc_jun_test --test_list=./usc/test.txt --ckpt_file=./pre_trained_model/synthia_498000
+
+
+python2 ./test_usc_jun.py --dataset=./usc/mini/data --output_dir=./output_usc_mini_test --test_list=./usc/mini/test.txt --ckpt_file=./pre_trained_model/synthia_498000
+
+Train:
